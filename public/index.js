@@ -1,12 +1,12 @@
 const inputName=document.querySelector('#productName')
 const inputPrice=document.querySelector('#productPrice')
 
-const button=documente.querySelector(button)
+const button=document.querySelector('button')
 button.addEventListener('click',(e)=>{
-    console.log(name=inputName.value, price=inputPrice.value)
+    
     const name=inputName.value
     const price=inputPrice.value
-
+    console.log(name, price)
     fetch('/api/v1/products',{
         method:'POST', 
         headers:{
@@ -15,6 +15,6 @@ button.addEventListener('click',(e)=>{
         body:JSON.stringify({
             name,
             price,
-        }),
-})
+        })
+    })
 })

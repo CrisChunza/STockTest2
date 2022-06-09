@@ -3,8 +3,8 @@ require('dotenv').config()
 const express= require('express')
 const { default: mongoose } = require('mongoose')
 const path= require('path')
-const { nextTick } = require('process')
-const { stringify } = require('querystring')
+const { next } = require('process')
+
 
 const app= express()
 mongoose
@@ -27,14 +27,20 @@ const productSchema=mongoose.Schema(
 
 )
 
-const Product=mongoose.model('product', productSchema)
+const Product=mongoose.model('Product', productSchema)
+
+app.get('/',  (req , res,next)=>{
+    console.log('Peticion recibida')
+    next();
+})
 
 
 app.use(express.json())
-app.post('/api/v1/products',(req, res, next)=>{
+app.post('/api/v1/products', (req, res, next)=>{
     const newProduct= new Product(req.body)
-    new Product
-        .Save()
+    
+    newProduct
+        .save()
         .then((result)=>{
             res.status(201).json({ok:true})
         })
@@ -44,10 +50,7 @@ app.post('/api/v1/products',(req, res, next)=>{
     res.status(201).json({ok:true})
 })
 
-app.get('/',  (req , res)=>{
-    console.log('Peticion recibida')
-    next()    
-})
+
 
 app.use(express.static(path.join(__dirname, 'public')))
 
@@ -55,5 +58,5 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 const PORT= process.env.PORT || 4000
 
-
+//
 
