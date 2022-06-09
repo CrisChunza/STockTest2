@@ -20,7 +20,7 @@ mongoose
     .catch((err)=>console.log(err))
 const productSchema=mongoose.Schema(
     {
-    name:{string, required: true},
+    name:{type: String, required: true},
     price:Number,
     },
     { timestamps: true }
